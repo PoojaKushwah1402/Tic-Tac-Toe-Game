@@ -1,0 +1,43 @@
+.Main-box{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    background-color: aquamarine;
+    padding: 2%;
+    margin: auto;
+    height: 400px;
+    width: 400px;
+    grid-gap: 10px;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    top: 30%;
+    left: 35%;
+}
+
+.cell-box{
+    background-color: aqua;
+    padding: auto;
+    font-size: 30px;
+    text-align: center;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.display-user{
+    border: 1px solid black;
+    width: 80%;
+    margin: auto;
+    padding: 1%;
+    display: flex;
+    margin-top: 2%;
+}
+
+.player-waiting , .player-playing {
+    flex: 1;
+    padding: 2%;
+    margin: 1%;
+    border: 1px solid pink;
+    text-align: left;
+
+}
