@@ -1,6 +1,12 @@
 import React from "react";
-import DisplayGame from "./Display";
-import DisplayPlayer from "./DisplayPlayer";
+import { Switch, Route } from 'react-router-dom'
+
+
+import Dashboard from "./Dashboard";
+import {setPoint, clearPoints} from "./DrawLine";
+import Header from "./Header";
+import Footer from "./Footer";
+import Details from "./UserDetails";
 
 class Main extends React.Component {
     constructor ( props ) {
@@ -9,88 +15,71 @@ class Main extends React.Component {
             current : {},
             X : 'Player1',
             O : 'Player2',
-            matrix : [new Array(3),new Array(3), new Array(3)]
-
-            // player1 : { 
-            //     points : [new Array(3),new Array(3), new Array(3)],
-            //     symbol : 'X'
-            //     },
-
-            // player2 : { 
-            //     points : [new Array(3),new Array(3), new Array(3)],
-            //     symbol : 'O'
-            //     },
+            matrix : [new Array(3),new Array(3), new Array(3)],
+            won : []
         }
     }
 
     static getDerivedStateFromProps (props, state) {
        
-        if(state.matrix[0][0] == undefined) {
+        if(state.matrix[0][0] === undefined) {
             for(let i in state.matrix) {
                 state.matrix[i].fill(0)
             }
-            // state.current.player = state.player1
-            // state.current.name = 'Player1'
             state.current = state.X;
             return state;
         }
         return null
     }
 
+    checkForTie = () => {
+        console.log('check');
+        for(let i in this.state.matrix) {
+            for(let j in this.state.matrix[i]) {
+                if(this.state.matrix[i][j] === 0 ) {
+                    return false
+                }
+            }
+        }
+        return true;
+    }
+
     switchUser = () => {
 
-        setTimeout(()=>{
-            // if(this.state.current.player === this.state.player1) {
-            //     let tempcurr = this.state.current;
-            //     tempcurr.player = this.state.player2
-            //     tempcurr.name = 'Player2'
-            //     this.setState({
-            //         current : tempcurr
-            //     })
-            // } else {
-            //     let tempcurr = this.state.current;
-            //     tempcurr.player = this.state.player1
-            //     tempcurr.name = 'Player1'
-            //     this.setState({
-            //         current : tempcurr
-            //     })
-            // }
+        if( ! this.checkForTie() ) {
 
-            if(this.state.current === this.state.X) {
-                this.setState({
-                    current : this.state.O
-                })
-            }
-            else {
-                this.setState({
-                    current : this.state.X
-                })
-            }
-        },0)
+        setTimeout(()=>{
+                if(this.state.current === this.state.X) {
+                    this.setState({
+                        current : this.state.O
+                    })
+                }
+                else {
+                    this.setState({
+                        current : this.state.X
+                    })
+                }
+            },0)
+
+         } else {
+            this.resetGame();
+            alert('Game Tied')
+         }
 
     }
 
     checkRows = ( player ) => {
 
         let flag = false;
-        let count ;
 
         for(let i in player) {
-            //count = 0;
-            // for(let j in player[i]) {
-
-            //     if(player[i][j]) {
-            //         count++;
-            //     }
-            //     if(count === 3) {
-            //         flag = true;
-            //         break;
-            //     }
-            // }
-            // if(flag) {
-            //     break;}
-            if( player[i][0] != 0 &&  player[i][0]  === player[i][1] && player[i][2] ===  player[i][1]  ) {
+            if( player[i][0] !== 0 &&  player[i][0]  === player[i][1] && player[i][2] ===  player[i][1]  ) {
                 flag = true;
+                this.state.won.push(`${i}0`);
+                this.state.won.push(`${i}1`);
+                this.state.won.push(`${i}2`);
+                setPoint(...this.state.won);
+
                 break;
             }
 
@@ -102,27 +91,25 @@ class Main extends React.Component {
         let flag = false
 
         if(player[0][0]) {
-            // for(let i=0; i<3; i++) {
-            //     if(player[i][i]) {
-            //         count++;
-            //     }else{
-            //         break;
-            //     }
-            // }
-            if( player[0][0] != 0 && player[0][0] === player[1][1] && player[1][1] === player[2][2] ) {
+            if( player[0][0] !== 0 && player[0][0] === player[1][1] && player[1][1] === player[2][2] ) {
                 flag = true;
+                this.state.won.push(`00`)
+                this.state.won.push(`11`)
+                this.state.won.push(`22`);
+                setPoint(...this.state.won);
+
             }
         }
         else if( player[0][2] ) {
-            // for(let i =0; i<3; i++) {
-            //     if(player[i][temp--]) {
-            //         count++;
-            //     }else{
-            //         break;
-            //     }
-            // }
-            if( player[0][2] != 0 && player[0][2] === player[1][1] && player[1][1] === player[2][0] ) {
+            if( player[0][2] !== 0 && player[0][2] === player[1][1] && player[1][1] === player[2][0] ) {
                 flag = true;
+                setPoint( `02`, `11`, `20`);
+                this.state.won.push(`02`)
+                this.state.won.push(`11`)
+                this.state.won.push(`20`);
+                setPoint(...this.state.won);
+
+                
             }
         }
         else return false;
@@ -130,33 +117,51 @@ class Main extends React.Component {
         return flag
     }
 
+
+
     checkColumns = player => {
         let flag = false;
-        let count ;
 
         for(let i=0; i<3; i++) {
-            // count = 0;
-            // for(let j=0; j<3; j++) {
 
-            //     if(player[j][i]) {
-            //         count++;
-            //     }
-            //     if(count === 3) {
-            //         flag = true;
-            //         break;
-            //     }
-            // }
-            // if(flag) {
-            //     break;}
-
-            if( player[0][i] != 0 &&  player[0][i]  === player[1][i] && player[2][i] ===  player[1][i]  ) {
+            if( player[0][i] !== 0 &&  player[0][i]  === player[1][i] && player[2][i] ===  player[1][i]  ) {
                 flag = true;
+                setPoint( `0${i}`, `1${i}`, `2${i}`);
+                this.state.won.push(`0${i}`)
+                this.state.won.push(`1${i}`)
+                this.state.won.push(`2${i}`)
+                setPoint(...this.state.won);
+
                 break;
             }
 
         }
 
         return flag;
+    }
+
+    resetGame = () => {
+        let points = this.state.won;
+        this.setState({
+            current : {},
+            X : this.state.X,
+            O : this.state.O,
+            matrix : [new Array(3),new Array(3), new Array(3)],
+            won : []
+        });
+        clearPoints(...points)
+    }
+
+    resetWholeGame = () => {
+        let points = this.state.won;
+        this.setState({
+            current : {},
+            X : 'Player1',
+            O : 'Player2',
+            matrix : [new Array(3),new Array(3), new Array(3)],
+            won : []
+        });
+        clearPoints(...points)
     }
 
     setPoints =  select => {
@@ -176,15 +181,15 @@ class Main extends React.Component {
       
        setTimeout(()=> {
            if( rowWin || colWin || diagWin ) {
-               alert('You Won' ) ;
+               console.log(this.state.current)
+                alert('You Won '+ this.state.current ) ;
+               this.resetGame();
                return
            }
             this.switchUser();
     
        },100)
-        
-        
-       
+          
     }
 
 
@@ -192,22 +197,46 @@ class Main extends React.Component {
         console.log(e.target.id)
         let select = e.target.id;
 
-        if(select == 'main') {
+        if(select === 'main') {
             return;
         }
-
        this.setPoints( select )
+    }
 
-       
-    
+    fillUserDetails = ( player1, player2) => {
+        console.log('hello',player1, player2)
+        this.setState({
+            X : player1,
+            O : player2
+        })
     }
 
     render() {
         return (
             <> 
-              <DisplayPlayer current = {this.state.current} p1 = {this.state.X} p2 = {this.state.O} />
-              {/* <DisplayGame player = {this.state.current.player} handler = {this.onSelectHandler} /> */}
-              <DisplayGame player = {this.state.matrix} handler = {this.onSelectHandler} />
+            <Header />
+
+            <Switch>
+
+               <Route exact path='/'
+                    render={(props) => (
+                    <Details {...props} 
+                    setDetails = {this.fillUserDetails} />)}
+               />
+
+                <Route path='/gamedashboard'
+                    render={(props) => (
+                    <Dashboard {...props} 
+                    current = {this.state.current} 
+                    p1 = {this.state.X} 
+                    p2 = {this.state.O} 
+                    player = {this.state.matrix} 
+                    resetWhole = {this.resetWholeGame}
+                    handler = {this.onSelectHandler} />)}
+                />
+            </Switch>
+
+            <Footer/>
             </>
         )
     }

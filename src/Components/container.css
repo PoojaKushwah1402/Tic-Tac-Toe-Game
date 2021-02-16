@@ -1,3 +1,27 @@
+.header{
+    background-color: #181818;
+    width: 100%;
+    padding: .5%;
+    text-align: left;
+    padding-left: 10%;
+    margin-bottom: 2%;
+    display: flex;
+    color: aliceblue;
+}
+
+.heading{
+    margin-left: 2%;
+    font-weight: bolder;
+    cursor: pointer;
+    font-size: xx-large;
+    padding: 1%;
+    
+}
+
+.link-dec{
+    text-decoration: none;
+}
+
 .Main-box{
     display: grid;
     grid-template-columns: 100px 100px 100px;
@@ -10,10 +34,63 @@
     grid-gap: 10px;
     justify-content: center;
     align-content: center;
-    position: absolute;
-    top: 30%;
-    left: 35%;
+
 }
+
+.end-game{
+    width: 20%;
+    margin: 2%;
+    padding: 1%;
+    background-color: rgb(209, 5, 5);
+}
+
+.container{
+    width: 70%;
+    margin: auto;
+    margin-top: 5%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+}
+
+.player{
+    margin: 1%;
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+}
+
+.icon{
+    padding: 1%;
+    margin: 1%;
+}
+
+label{
+    font-size: larger;
+    padding: 1%;
+    margin: 1%;
+}
+
+input {
+    width: 30%;
+    height: 10%;
+    padding: 2%;
+    padding-left: 5%;
+    font-size: large;
+    border-radius: 9px;
+}
+
+.submit-user-detail{
+    padding: 1%;
+    font-size: large;
+    margin: 5%;
+    background-color: #38ec5f;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+
+
 
 .cell-box{
     background-color: aqua;
@@ -24,8 +101,16 @@
     box-sizing: border-box;
 }
 
-.display-user{
+.cell-box-won{
+    background-color: rgb(72, 255, 0);
+    padding: auto;
+    font-size: 30px;
+    text-align: center;
     border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.display-user{
     width: 80%;
     margin: auto;
     padding: 1%;
@@ -37,7 +122,30 @@
     flex: 1;
     padding: 2%;
     margin: 1%;
-    border: 1px solid pink;
     text-align: left;
+
+}
+
+
+
+
+
+.footer-logo{
+    height: 70%;
+    margin-top: .5%;
+}
+
+
+
+.footer{
+    background-color: #181818;
+    height: 7%;
+    padding: .3%;
+    width: 100%;
+    text-align: left;
+    padding-left: 10%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 
 }
