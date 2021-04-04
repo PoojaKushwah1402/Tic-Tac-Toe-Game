@@ -168,27 +168,28 @@ class Main extends React.Component {
         let row = Number(select[0]);
         let col = Number(select[1]);
         let currtemp = this.state.matrix;
+        console.log(currtemp[row][col])
+        if(currtemp[row][col] === 0) {
+            currtemp[row][col] = (this.state.current === this.state.X) ? 'X' : 'O'
+                this.setState({
+                    matrix : currtemp
+                })
 
-        currtemp[row][col] = (this.state.current === this.state.X) ? 'X' : 'O'
-
-        this.setState({
-            matrix : currtemp
-        })
-
-         let rowWin = this.checkRows(currtemp);
-         let colWin = this.checkColumns(currtemp);
-         let diagWin = this.checkDiag(currtemp)
-      
-       setTimeout(()=> {
-           if( rowWin || colWin || diagWin ) {
-               console.log(this.state.current)
-                alert('You Won '+ this.state.current ) ;
-               this.resetGame();
-               return
-           }
-            this.switchUser();
-    
-       },100)
+                let rowWin = this.checkRows(currtemp);
+                let colWin = this.checkColumns(currtemp);
+                let diagWin = this.checkDiag(currtemp)
+            
+            setTimeout(()=> {
+                if( rowWin || colWin || diagWin ) {
+                    console.log(this.state.current)
+                        alert('You Won '+ this.state.current ) ;
+                    this.resetGame();
+                    return
+                }
+                    this.switchUser();
+            },100)
+        }
+        
           
     }
 
@@ -224,7 +225,7 @@ class Main extends React.Component {
                     setDetails = {this.fillUserDetails} />)}
                />
 
-                <Route path='/gamedashboard'
+                <Route exact path='/gamedashboard'
                     render={(props) => (
                     <Dashboard {...props} 
                     current = {this.state.current} 
@@ -234,6 +235,9 @@ class Main extends React.Component {
                     resetWhole = {this.resetWholeGame}
                     handler = {this.onSelectHandler} />)}
                 />
+                <Route path='*' >
+                    <div> <h1>404 not found</h1></div>
+                </Route>
             </Switch>
 
             <Footer/>
