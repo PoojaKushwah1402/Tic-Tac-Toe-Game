@@ -5,17 +5,39 @@ import { Link } from "react-router-dom";
 import logo from './images/brandlogo.png';
 import   "./container.css";
 
+const logoutBuild = reset => {
+    let logout ;
 
-const Header = () => {
+    logout = (  <Link to='/' className='link-dec brand right' >
+                    <button 
+                     onClick={()=>reset()}
+                        className='end-game' > 
+                        End Game   
+                    </button>
+                    </Link> )
+    
 
+    return logout;
+}
+
+const Header = props => {
+
+    const logout = (props.userLogin) ? logoutBuild( props.resetWhole) : ''
+
+    console.log(props.userLogin)
     return(
 
-         <Link to='/' className='link-dec' >
-            <div className='header' >
-                <img src={logo} alt='info-detail-logo' />
-                <div className='heading'> Tic Tac Toe</div>
-            </div>
-         </Link>
+        <div  className='header'>
+            <Link to='/' className='link-dec brand' >
+                <div className='left' >
+                    <img src={logo} alt='info-detail-logo' />
+                    <div className='heading'> Tic Tac Toe</div>
+                </div>
+            </Link>
+            {logout}
+
+        </div>
+         
 
     )
 

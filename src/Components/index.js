@@ -12,6 +12,7 @@ class Main extends React.Component {
     constructor ( props ) {
         super(props)
         this.state ={
+            isLogin : false,
             current : {},
             X : 'Player1',
             O : 'Player2',
@@ -147,7 +148,7 @@ class Main extends React.Component {
             X : this.state.X,
             O : this.state.O,
             matrix : [new Array(3),new Array(3), new Array(3)],
-            won : []
+            won : [],
         });
         clearPoints(...points)
     }
@@ -159,7 +160,8 @@ class Main extends React.Component {
             X : 'Player1',
             O : 'Player2',
             matrix : [new Array(3),new Array(3), new Array(3)],
-            won : []
+            won : [],
+            isLogin : false
         });
         clearPoints(...points)
     }
@@ -169,6 +171,7 @@ class Main extends React.Component {
         let col = Number(select[1]);
         let currtemp = this.state.matrix;
         console.log(currtemp[row][col])
+        //need to create new method that will take care of selected point
         if(currtemp[row][col] === 0) {
             currtemp[row][col] = (this.state.current === this.state.X) ? 'X' : 'O'
                 this.setState({
@@ -208,14 +211,17 @@ class Main extends React.Component {
         console.log('hello',player1, player2)
         this.setState({
             X : player1,
-            O : player2
+            O : player2,
+            isLogin : true
         })
     }
 
     render() {
         return (
             <> 
-            <Header />
+            <Header userLogin = {this.state.isLogin}
+                    resetWhole = {this.resetWholeGame}
+            />
 
             <Switch>
 
@@ -232,7 +238,6 @@ class Main extends React.Component {
                     p1 = {this.state.X} 
                     p2 = {this.state.O} 
                     player = {this.state.matrix} 
-                    resetWhole = {this.resetWholeGame}
                     handler = {this.onSelectHandler} />)}
                 />
                 <Route path='*' >
