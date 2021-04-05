@@ -1,5 +1,7 @@
 import React from "react";
 import { Switch, Route } from 'react-router-dom'
+import CloseIcon from '@material-ui/icons/Close';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 
 import Dashboard from "./Dashboard";
@@ -34,7 +36,7 @@ class Main extends React.Component {
     }
 
     checkForTie = () => {
-        console.log('check');
+       // console.log('check');
         for(let i in this.state.matrix) {
             for(let j in this.state.matrix[i]) {
                 if(this.state.matrix[i][j] === 0 ) {
@@ -79,6 +81,7 @@ class Main extends React.Component {
                 this.state.won.push(`${i}0`);
                 this.state.won.push(`${i}1`);
                 this.state.won.push(`${i}2`);
+               // console.log(this.state.won);
                 setPoint(...this.state.won);
 
                 break;
@@ -97,6 +100,7 @@ class Main extends React.Component {
                 this.state.won.push(`00`)
                 this.state.won.push(`11`)
                 this.state.won.push(`22`);
+               // console.log(this.state.won);
                 setPoint(...this.state.won);
 
             }
@@ -104,10 +108,11 @@ class Main extends React.Component {
         else if( player[0][2] ) {
             if( player[0][2] !== 0 && player[0][2] === player[1][1] && player[1][1] === player[2][0] ) {
                 flag = true;
-                setPoint( `02`, `11`, `20`);
+                //setPoint( `02`, `11`, `20`);
                 this.state.won.push(`02`)
                 this.state.won.push(`11`)
                 this.state.won.push(`20`);
+               // console.log(this.state.won);
                 setPoint(...this.state.won);
 
                 
@@ -131,6 +136,7 @@ class Main extends React.Component {
                 this.state.won.push(`0${i}`)
                 this.state.won.push(`1${i}`)
                 this.state.won.push(`2${i}`)
+              //  console.log(this.state.won);
                 setPoint(...this.state.won);
 
                 break;
@@ -142,7 +148,7 @@ class Main extends React.Component {
     }
 
     resetGame = () => {
-        let points = this.state.won;
+        //let points = this.state.won;
         this.setState({
             current : {},
             X : this.state.X,
@@ -150,11 +156,12 @@ class Main extends React.Component {
             matrix : [new Array(3),new Array(3), new Array(3)],
             won : [],
         });
-        clearPoints(...points)
+        //clearPoints(...points)
+        clearPoints()
     }
 
     resetWholeGame = () => {
-        let points = this.state.won;
+        //let points = this.state.won;
         this.setState({
             current : {},
             X : 'Player1',
@@ -163,17 +170,26 @@ class Main extends React.Component {
             won : [],
             isLogin : false
         });
-        clearPoints(...points)
+       // clearPoints(...points)
+        clearPoints()
+    }
+
+    setStyle = id => {
+
+        const currDiv = document.querySelector('#_'+id);
+       // console.log(currDiv,id);
+        currDiv.className = 'occupied-div'
     }
 
     setPoints =  select => {
-        let row = Number(select[0]);
-        let col = Number(select[1]);
+        let row = Number(select[1]);
+        let col = Number(select[2]);
         let currtemp = this.state.matrix;
-        console.log(currtemp[row][col])
-        //need to create new method that will take care of selected point
+        console.log(currtemp)
         if(currtemp[row][col] === 0) {
-            currtemp[row][col] = (this.state.current === this.state.X) ? 'X' : 'O'
+            this.setStyle(row+''+col);
+            currtemp[row][col] = (this.state.current === this.state.X) ? 'X': 'O'
+           // currtemp[row][col] = (this.state.current === this.state.X) ? <CloseIcon/> : <RadioButtonUncheckedIcon/>
                 this.setState({
                     matrix : currtemp
                 })
@@ -184,7 +200,7 @@ class Main extends React.Component {
             
             setTimeout(()=> {
                 if( rowWin || colWin || diagWin ) {
-                    console.log(this.state.current)
+                   // console.log(this.state.current)
                         alert('You Won '+ this.state.current ) ;
                     this.resetGame();
                     return
@@ -198,7 +214,7 @@ class Main extends React.Component {
 
 
     onSelectHandler = ( e ) => {
-        console.log(e.target.id)
+       // console.log(e.target.id)
         let select = e.target.id;
 
         if(select === 'main') {
@@ -208,7 +224,7 @@ class Main extends React.Component {
     }
 
     fillUserDetails = ( player1, player2) => {
-        console.log('hello',player1, player2)
+      //  console.log('hello',player1, player2)
         this.setState({
             X : player1,
             O : player2,

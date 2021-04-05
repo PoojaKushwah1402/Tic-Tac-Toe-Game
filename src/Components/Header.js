@@ -24,7 +24,7 @@ const Header = props => {
 
     const logout = (props.userLogin) ? logoutBuild( props.resetWhole) : ''
 
-    console.log(props.userLogin)
+   // console.log(props.userLogin)
     return(
 
         <div  className='header'>
