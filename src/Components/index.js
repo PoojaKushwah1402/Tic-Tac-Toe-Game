@@ -1,7 +1,6 @@
 import React from "react";
 import { Switch, Route } from 'react-router-dom'
-import CloseIcon from '@material-ui/icons/Close';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+
 
 
 import Dashboard from "./Dashboard";
@@ -9,6 +8,7 @@ import {setPoint, clearPoints} from "./DrawLine";
 import Header from "./Header";
 import Footer from "./Footer";
 import Details from "./UserDetails";
+import NotFound from "./NotFoundPage";
 
 class Main extends React.Component {
     constructor ( props ) {
@@ -95,6 +95,7 @@ class Main extends React.Component {
         let flag = false
 
         if(player[0][0]) {
+            console.log(this.state.won);
             if( player[0][0] !== 0 && player[0][0] === player[1][1] && player[1][1] === player[2][2] ) {
                 flag = true;
                 this.state.won.push(`00`)
@@ -105,14 +106,15 @@ class Main extends React.Component {
 
             }
         }
-        else if( player[0][2] ) {
+        if( player[0][2] ) {
+            console.log(this.state.won);
             if( player[0][2] !== 0 && player[0][2] === player[1][1] && player[1][1] === player[2][0] ) {
                 flag = true;
                 //setPoint( `02`, `11`, `20`);
                 this.state.won.push(`02`)
                 this.state.won.push(`11`)
                 this.state.won.push(`20`);
-               // console.log(this.state.won);
+                console.log(this.state.won);
                 setPoint(...this.state.won);
 
                 
@@ -185,7 +187,7 @@ class Main extends React.Component {
         let row = Number(select[1]);
         let col = Number(select[2]);
         let currtemp = this.state.matrix;
-        console.log(currtemp)
+        //console.log(currtemp)
         if(currtemp[row][col] === 0) {
             this.setStyle(row+''+col);
             currtemp[row][col] = (this.state.current === this.state.X) ? 'X': 'O'
@@ -232,7 +234,23 @@ class Main extends React.Component {
         })
     }
 
+    ifEligible = token => {
+        let dashboard = (<Route exact path='/gamedashboard'
+                                render={(props) => (
+                                <Dashboard {...props} 
+                                current = {this.state.current} 
+                                p1 = {this.state.X} 
+                                p2 = {this.state.O} 
+                                player = {this.state.matrix} 
+                                handler = {this.onSelectHandler} />)}
+                            />)
+        return (token) ? dashboard : '';
+    }
+
     render() {
+
+        const gameboard = this.ifEligible(this.state.isLogin)
+
         return (
             <> 
             <Header userLogin = {this.state.isLogin}
@@ -247,18 +265,18 @@ class Main extends React.Component {
                     setDetails = {this.fillUserDetails} />)}
                />
 
-                <Route exact path='/gamedashboard'
-                    render={(props) => (
-                    <Dashboard {...props} 
-                    current = {this.state.current} 
-                    p1 = {this.state.X} 
-                    p2 = {this.state.O} 
-                    player = {this.state.matrix} 
-                    handler = {this.onSelectHandler} />)}
-                />
-                <Route path='*' >
-                    <div> <h1>404 not found</h1></div>
-                </Route>
+                {/* // <Route exact path='/gamedashboard'
+                //     render={(props) => (
+                //     <Dashboard {...props} 
+                //     current = {this.state.current} 
+                //     p1 = {this.state.X} 
+                //     p2 = {this.state.O} 
+                //     player = {this.state.matrix} 
+                //     handler = {this.onSelectHandler} />)}
+                // /> */}
+                {gameboard}
+                <Route path='*' component={NotFound} />
+                    
             </Switch>
 
             <Footer/>
