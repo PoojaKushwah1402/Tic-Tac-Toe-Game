@@ -10,7 +10,6 @@ const Dashboard = props => {
         <> 
             <DisplayPlayer current = {props.current} p1 = {props.p1} p2 = {props.p2} />
             <DisplayGame player = {props.player} handler = {props.handler} onreset = {props.onreset} />
-            
         </>
     )
 

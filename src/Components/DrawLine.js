@@ -34,6 +34,7 @@ const clearPoints = (pointA, pointB, pointC) => {
         }
     }
    
+ 
     // div1.classList = 'cell-box';
     // div2.classList = 'cell-box';
     // div3.classList = 'cell-box';
