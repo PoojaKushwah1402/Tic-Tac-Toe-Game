@@ -45,12 +45,14 @@
 
 .Main-box{
     display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px;
+    grid-template-columns: 80px 80px 80px;
+    grid-template-rows: 80px 80px 80px;
     padding: 2%;
     margin: auto;
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
+    margin-bottom: 5%;
+
     grid-gap: 20px;
     justify-content: center;
     align-content: center;
@@ -66,9 +68,17 @@
     border-radius: 9px;
     background-color: rgb(177, 42, 42);
     cursor: pointer;
+    margin-top: 5%;
+    font-size: larger;
+    border: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
 }
 
 .end-game:hover{box-shadow: 5px 10px 18px #961111;}
+
+.reset-game:hover{box-shadow: 5px 10px 18px #961111;}
+
 
 .container{
     width: 70%;
@@ -229,4 +239,16 @@ input {
     margin: 0;
     font-family: cursive;
 
+}
+
+.reset-game{
+    padding: 1%;
+    width: 30%;
+    cursor: pointer;
+    background-color: rgb(177, 42, 42);
+    font-size: x-large;
+    border-radius: 9px;
+    border: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
 }

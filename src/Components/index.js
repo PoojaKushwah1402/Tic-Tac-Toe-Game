@@ -150,7 +150,7 @@ class Main extends React.Component {
     }
 
     resetGame = () => {
-        //let points = this.state.won;
+        console.log('reset')
         this.setState({
             current : {},
             X : this.state.X,
@@ -217,12 +217,15 @@ class Main extends React.Component {
 
     onSelectHandler = ( e ) => {
        // console.log(e.target.id)
-        let select = e.target.id;
-
-        if(select === 'main') {
+        let select = e.target.getAttribute('data-custom-id');
+        console.log(select)
+        if(!select) {
             return;
         }
-       this.setPoints( select )
+        if(select[0]==='_'){
+            this.setPoints( select )
+        }
+       
     }
 
     fillUserDetails = ( player1, player2) => {
@@ -242,7 +245,8 @@ class Main extends React.Component {
                                 p1 = {this.state.X} 
                                 p2 = {this.state.O} 
                                 player = {this.state.matrix} 
-                                handler = {this.onSelectHandler} />)}
+                                handler = {this.onSelectHandler} 
+                                onreset = {this.resetGame}  />)}
                             />)
         return (token) ? dashboard : '';
     }

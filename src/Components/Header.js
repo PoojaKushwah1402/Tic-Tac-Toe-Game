@@ -29,10 +29,10 @@ const Header = props => {
 
         <div  className='header'>
             <div className=' brand '>
-                <Link to='/' className='link-dec  left' >
+                <Link to='/' className='link-dec  left' onClick={()=>props.resetWhole()} >
                     {/* <div className='left' > */}
                         <img src={logo} alt='info-detail-logo' />
-                        <div className='heading'> Tic Tac Toe</div>
+                        <div className='heading'> TicTacToe</div>
                     {/* </div> */}
                 </Link>
             </div>

@@ -23,13 +23,18 @@ const clearPoints = (pointA, pointB, pointC) => {
     // const div1 = document.getElementById(`_${pointA}`);
     // const div2 = document.getElementById(`_${pointB}`);
     // const div3 = document.getElementById(`_${pointC}`);
-    const main = document.getElementById(`main`).children;
-    console.log(main);
-
-    for(let x=0; x<9; x++) {
-        console.log(main[x]);
-        main[x].classList = 'cell-box';
+    const mainid = document.getElementById(`main`);
+    if(mainid) {
+        const main = mainid.children
+        console.log(main);
+    
+        for(let x=0; x<9; x++) {
+            console.log(main[x]);
+            main[x].classList = 'cell-box';
+        }
     }
+   
+ 
     // div1.classList = 'cell-box';
     // div2.classList = 'cell-box';
     // div3.classList = 'cell-box';
