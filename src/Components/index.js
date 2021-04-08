@@ -103,7 +103,7 @@ class Main extends React.Component {
                 this.state.won.push(`22`);
                // console.log(this.state.won);
                 setPoint(...this.state.won);
-
+                return true;
             }
         }
         if( player[0][2] ) {
@@ -116,11 +116,10 @@ class Main extends React.Component {
                 this.state.won.push(`20`);
                 console.log(this.state.won);
                 setPoint(...this.state.won);
-
+                return true
                 
             }
         }
-        else return false;
 
         return flag
     }
