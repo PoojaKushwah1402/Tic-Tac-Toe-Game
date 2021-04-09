@@ -3,9 +3,8 @@
       margin-top: 20%;
     }
     .player{
-        margin: 3%;
+        margin: 2%;
         display: block;
-        margin-top: 10%;
       }
     
       label{
@@ -25,7 +24,7 @@
       }
     
       .submit{
-          margin-top: 5%;
+          margin-top: 8%;
           width: 100%;
       }
   }
