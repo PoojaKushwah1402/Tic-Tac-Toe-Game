@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 
 import   "./container.css";
+import './index.css'
 
 
 const Details = ( props ) => {

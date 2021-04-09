@@ -1,0 +1,33 @@
+@media only screen and (max-width: 600px) {
+    .container {
+      margin-top: 20%;
+    }
+    .player{
+        margin: 3%;
+        display: block;
+        margin-top: 10%;
+      }
+    
+      label{
+          flex: 1;
+          margin: 1%;
+          text-align: left;
+          display: block;
+      }
+    
+      input{
+          width: 70%;
+          margin: 1%;
+      }
+    
+      .icon{
+          display: inline-block;
+      }
+    
+      .submit{
+          margin-top: 5%;
+          width: 100%;
+      }
+  }
+
+  
