@@ -1,17 +1,15 @@
 import React from 'react';
-
-import logo from './images/brandlogo.png';
-//import logo2 from './images/footer.png';
-import   "./container.css";
+import "./container.css";
 
 const Footer = () => {
-
-    return(
-        <div className='footer' >
-                <img src={logo} className='footer-logo' alt='info-detail-logo' />
-        </div>
+    return (
+        <footer className='footer'>
+            <div className="footer-content">
+                <span className="footer-logo-text">✕○</span>
+                <span className="footer-text">TicTacToe Arena</span>
+            </div>
+        </footer>
     )
-
 }
 
 export default Footer;
