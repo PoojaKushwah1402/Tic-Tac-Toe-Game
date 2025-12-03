@@ -1,6 +1,6 @@
 import React from "react";
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import PanToolIcon from '@material-ui/icons/PanTool';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import PanToolIcon from '@mui/icons-material/PanTool';
 
 const DisplayPlayer = ({ current, p1, p2 }) => {
     const playing = (current === p1) ? p1 : p2;

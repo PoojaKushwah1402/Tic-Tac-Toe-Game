@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import CloseIcon from '@material-ui/icons/Close';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import CloseIcon from '@mui/icons-material/Close';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { Link } from "react-router-dom";
 
 import "./container.css";
